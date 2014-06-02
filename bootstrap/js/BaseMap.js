@@ -29,8 +29,10 @@ var mapControls=function (){
       						path: google.maps.SymbolPath.CIRCLE,
       						scale: 4,
       						strokeColor:"#1223ff"
+
    							},
-   						animation: google.maps.Animation.DROP
+   						animation: google.maps.Animation.DROP,
+   						draggable:true
 					}
 				break;
 
@@ -47,17 +49,22 @@ var mapControls=function (){
 
 	function addPlaces(place)
 	{
-		 	var marker=new google.maps.Marker(
-			{
-						position:place.geometry.location,
-						map:MapRef,
-   						animation: google.maps.Animation.DROP
-
-					}
-			);
+	 	var marker=new google.maps.Marker({
+			position:place.geometry.location,
+			map:MapRef,
+			animation: google.maps.Animation.DROP
+		});
 
 		google.maps.event.addListener(marker, 'click', function() {
-		    infowindow.setContent(place.name+"<br/>Ubicación:"+place.vicinity);
+			var content="<strong>"+place.name+"</strong><br/>Ubicación:"+place.vicinity+"<br/>";
+			if(typeof(place.photos)!="undefined" && place.photos.length>0)
+			{
+				content+="<div align='center'>"
+				for(var i=0;i<place.photos.length;i++)
+					content+="<img src='"+place.photos[i].getUrl({maxWidth:200,maxHeight:150})+"' widh='"+place.photos[i].width+"' />";
+				content+="</div>"
+			}
+		    infowindow.setContent(content);
 		    infowindow.open(MapRef, this);
 	  	});
 	}
@@ -66,7 +73,7 @@ var mapControls=function (){
 		var request = {
     		location: MapRef.getCenter(),
     		radius: 5000,
-    		types: [searchType]
+    		keyword:searchType
   			};
 
   
@@ -93,12 +100,12 @@ $(function(){
 
 	if (navigator.geolocation) { /* Si el navegador tiene geolocalizacion */
 		Control=mapControls();
-                navigator.geolocation.getCurrentPosition(getPosition, errores);
-            }else{
+        navigator.geolocation.getCurrentPosition(getPosition, errores);
+    }
+            else{
                 alert('Oops! Tu navegador no soporta geolocalización. Bájate Chrome, que es gratis!');
             }	
 });
-
 
 function getPosition(position)
 {
@@ -107,7 +114,6 @@ function getPosition(position)
 	Control.init(lat,lng,14);
 	Control.addMarker(lat,lng,"currentLocation");
 }
-
 
 function errores(err) {
     /*Controlamos los posibles errores */
