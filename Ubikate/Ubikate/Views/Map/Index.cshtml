@@ -1,0 +1,68 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLJo0DLMNjD8pAieAlHOOlugYaZo-7o9M">
+    </script>
+    <script type="text/javascript" src="~/Scripts/BaseMap.js"></script>
+    <title>Index</title>
+    <style>
+        #map-canvas
+        {
+            width:100%;
+            height:700px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div id="map-canvas"></div>
+    </div>
+
+    <div id="formdialog">
+        <form>
+            <div class="form-group">
+                <input type="hidden" name="businessid" id="businessid" />
+            </div>
+            <div class="form-group">
+                <label>Nombre del Comercio</label>
+                <input type="text" id="name" name="name" placeholder="Nombre del Comercio" required class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Numero</label>
+                <input type="text" id="number" name="number" placeholder="Número de Casa" class="form-control"/>
+            </div>
+
+            <div class="form-group">
+                <label>Calle</label>
+                <input type="text" id="street" name="street" placeholder="Nombre de la Calle" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label>Ciudad</label>
+                <input type="text" id="city" name="city" placeholder="Ciudad" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label>País</label>
+                <input type="text" id="country" name="country" placeholder="País" class="form-control" />
+            </div>
+            <div class="form-group col-xs-6">
+                <label class="control-label" for ="lat">Lat</label>
+                <input type="text" id="lat" name="lat" placeholder="Latitud" class="form-control" aria-describedby="inputWarning2Status" readonly="true" />
+            </div>
+            <div class="form-group col-xs-6">
+                <label class="control-label" for ="lat">Lng</label>
+                <input type="text" id="lng" name="lng" placeholder="Longitud" class="form-control" aria-describedby="inputWarning2Status" readonly="true" />
+            </div>
+
+        </form>
+
+    </div>
+</body>
+</html>
