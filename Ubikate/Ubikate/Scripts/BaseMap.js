@@ -105,6 +105,10 @@ var MapControlx=function() {
                 }
             });
         });
+
+        marker.addListener("draggend", function (position) {
+
+        });
     };
     MapControlx.prototype.loadBussiness = function () {
         $.ajax(
