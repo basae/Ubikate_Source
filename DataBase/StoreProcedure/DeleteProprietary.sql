@@ -6,5 +6,8 @@ create procedure DeleteProprietary
 )
 as
 begin
-	delete from proprietary where proprietaryid=@proprietaryid
+	update proprietary 
+	set
+	active=0
+	where proprietaryid=@proprietaryid
 end
